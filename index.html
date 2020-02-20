@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Antonio Pierro - Processign Project</title>
+        <title>Giancarlo Mura - Processign Project</title>
         <script src="vendors/processing.min.js"></script>
     </head>
     <body>
@@ -11,19 +11,48 @@
         <script type="text/processing">
 
             // Write your project here
-            
-            // Example
-            void setup() {
-              size(200, 200);
-              background(255);
-            }
-            void draw(){
-                pushMatrix();
-                translate(100, 100);
-                rotate(radians(frameCount * 2  % 360));
-                rect(0, 0, 80, 5);
-                popMatrix();
-            }
+            float angleR = 0;
+void setup() {
+  background(#87cefa); //colore sfondo bianco
+  size(512, 341); //formato 512x340
+  }
+
+void draw() {
+  translate(width/2, height/2);  // Traslazione al centro del canvas
+  fill(255, 200, 50); //riempie il solo di giallo
+  ellipse(0, 0, 84, 84); //disegna il sole
+
+  // Rotazione della terra
+  pushMatrix();
+  rotate(angleR);
+  translate(100, 0);
+  fill(50, 200, 255);
+  ellipse(0, 0, 40, 40);
+
+  // Astro 1 ruota intorno alla terra
+  // pushMatrix() è chiamato per salvare lo stato di trasformazione prima di disegnare astro 1. 
+  // This way we can pop and return to earth before drawing moon #2. 
+  // Gli astri ruotano intorno alla terra che a sua volta ruoto intorno al sole.
+  pushMatrix(); 
+  rotate(-angleR*4);
+  translate(36, 0);
+  fill(50, 255, 200);
+  ellipse(0, 0, 12, 12);
+  popMatrix();
+
+  // Astro 2 ruota intorno alla terra
+  pushMatrix();
+  rotate(angleR*2);
+  translate(24, 0);
+  fill(50, 255, 200);
+  ellipse(0, 0, 6, 6);
+  popMatrix();
+
+  popMatrix();
+
+  angleR += 0.01;
+  
+}
             
         </script>
         <canvas></canvas>
